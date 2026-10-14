@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ScamShield helps you identify suspicious messages and links and learn safer online habits.">
+  <title>ScamShield — Digital Safety Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a href="#dashboard" class="brand">
+      <span class="brand-icon">🛡</span>
+      <span>Scam<span class="brand-accent">Shield</span></span>
+    </a>
+
+    <div class="sidebar-label">WORKSPACE</div>
+
+    <nav class="sidebar-nav">
+      <a href="#dashboard" class="nav-link active" data-page="dashboard"><span>⌂</span> Dashboard</a>
+      <a href="#scanner" class="nav-link" data-page="scanner"><span>⌕</span> Message scanner</a>
+      <a href="#urlscanner" class="nav-link" data-page="urlscanner"><span>↗</span> URL scanner</a>
+      <a href="#history" class="nav-link" data-page="history"><span>◷</span> Scan history</a>
+      <a href="#safety" class="nav-link" data-page="safety"><span>✦</span> Safety guide</a>
+      <a href="#settings" class="nav-link" data-page="settings"><span>⚙</span> Settings</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="shield-card">
+        <div class="shield-card-icon">🔐</div>
+        <h3>Pause. Check. Protect.</h3>
+        <p>Take a moment before clicking links or sharing personal information.</p>
+      </div>
+      <div class="sidebar-footer">Made for a safer internet 💙</div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-button menu-button" id="menuButton" aria-label="Toggle navigation">☰</button>
+        <div>
+          <p class="eyebrow">YOUR DIGITAL SAFETY SPACE</p>
+          <h1 id="breadcrumbTitle">Dashboard</h1>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="theme-toggle" id="themeToggle" type="button">
+          <span id="themeIcon">☾</span>
+          <span id="themeLabel">Dark mode</span>
+        </button>
+        <div class="avatar">S</div>
+      </div>
+    </header>
+
+    <div class="page-container">
+      <section class="page-section active" id="dashboard">
+        <div class="welcome-banner">
+          <div class="welcome-content">
+            <span class="status-tag"><span class="status-dot"></span> DIGITAL SAFETY ASSISTANT</span>
+            <h2>Think before you click.</h2>
+            <p>Check suspicious messages and links, understand common warning signs, and build safer online habits.</p>
+            <button class="primary-button" data-go="scanner">Scan a message <span>→</span></button>
+          </div>
+
+          <div class="welcome-illustration" aria-hidden="true">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="hero-shield">✓</div>
+            <span class="float-icon float-one">🔒</span>
+            <span class="float-icon float-two">✉</span>
+            <span class="float-icon float-three">✓</span>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">YOUR ACTIVITY</p>
+            <h2>Safety overview</h2>
+          </div>
+          <span class="subtle-text">Saved on this device</span>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <div class="stat-icon purple">⌕</div>
+            <p>Total scans</p>
+            <div class="stat-bottom">
+              <strong id="totalScans">0</strong>
+              <span class="stat-note">Messages and links</span>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon red">⚠</div>
+            <p>High-risk alerts</p>
+            <div class="stat-bottom">
+              <strong id="highRiskCount">0</strong>
+              <span class="stat-note">Needs caution</span>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon green">✓</div>
+            <p>Lower-risk results</p>
+            <div class="stat-bottom">
+              <strong id="lowRiskCount">0</strong>
+              <span class="stat-note">Fewer signals found</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="content-grid">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">QUICK CHECK</p>
+                <h2>Check a suspicious message</h2>
+              </div>
+              <span class="panel-icon">✦</span>
+            </div>
+
+            <p class="muted">Paste an SMS, email, social message, or job offer to look for common warning signs.</p>
+
+            <form id="scanForm">
+              <label for="messageInput">Message content</label>
+              <textarea id="messageInput" maxlength="5000" placeholder="Paste the message you want to check..." required></textarea>
+
+              <div class="input-footer">
+                <span id="charCount">0 / 5000</span>
+                <span>🔒 Processed in your browser</span>
+              </div>
+
+              <p class="form-error" id="formError" role="alert"></p>
+              <button class="primary-button full-button" type="submit">Analyze message <span>→</span></button>
+            </form>
+
+            <div class="sample-area">
+              <p class="sample-title">TRY A SAMPLE</p>
+              <div class="sample-buttons">
+                <button class="sample-button" type="button" data-sample="phishing">⚠ Phishing SMS</button>
+                <button class="sample-button" type="button" data-sample="safe">✓ Normal message</button>
+                <button class="sample-button" type="button" data-sample="job">💼 Fake job offer</button>
+                <button class="sample-button" type="button" data-sample="payment">💳 Payment request</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel recent-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">RECENT ACTIVITY</p>
+                <h2>Recent scans</h2>
+              </div>
+              <button class="text-button" data-go="history">View all →</button>
+            </div>
+            <div id="historyList" class="history-list"></div>
+          </article>
+        </div>
+
+        <section class="panel results-panel" id="results" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">SCAN REPORT</p>
+              <h2>Analysis results</h2>
+            </div>
+            <span class="risk-pill" id="riskPill">Analysis complete</span>
+          </div>
+
+          <div class="result-overview">
+            <div class="score-ring" id="scoreRing">
+              <div class="score-inner">
+                <strong id="riskScore">0</strong>
+                <span>/ 100</span>
+              </div>
+            </div>
+
+            <div class="result-copy">
+              <h3 id="riskTitle">Analysis complete</h3>
+              <p id="riskSummary"></p>
+              <div class="result-status" id="resultStatus"></div>
+            </div>
+          </div>
+
+          <div class="meter-track"><div class="meter-fill" id="meterFill"></div></div>
+
+          <div class="findings-header">
+            <h3>Warning signs found</h3>
+            <span class="finding-count" id="findingCount">0 findings</span>
+          </div>
+
+          <ul id="findingsList" class="findings-list"></ul>
+
+          <div class="breakdown">
+            <h3>Risk contribution breakdown</h3>
+            <div id="riskBreakdown" class="breakdown-list"></div>
+          </div>
+
+          <div class="recommendation-box">
+            <span class="recommendation-icon">💡</span>
+            <div>
+              <h3>Recommended next steps</h3>
+              <p id="recommendationText"></p>
+            </div>
+          </div>
+
+          <div class="checklist">
+            <h3>Before you act, check these items</h3>
+            <label><input type="checkbox"> I verified the sender using a trusted contact method.</label>
+            <label><input type="checkbox"> I checked the website address independently.</label>
+            <label><input type="checkbox"> I did not share an OTP, password, PIN, or banking details.</label>
+            <label><input type="checkbox"> I avoided paying unexpected fees or transferring money.</label>
+          </div>
+
+          <div class="result-actions">
+            <button class="secondary-button" id="copyReportButton" type="button">▣ Copy report</button>
+            <button class="secondary-button" id="downloadReportButton" type="button">↓ Download report</button>
+            <button class="secondary-button" id="speakButton" type="button">🔊 Read aloud</button>
+            <button class="secondary-button" id="clearButton" type="button">Clear results</button>
+          </div>
+
+          <p class="disclaimer">ScamShield uses rule-based checks, not a certified security service. Scores are heuristic indicators, not probabilities. A low score does not prove a message is safe.</p>
+        </section>
+      </section>
+
+      <section class="page-section" id="scanner">
+        <div class="page-intro">
+          <p class="eyebrow">MESSAGE CHECKER</p>
+          <h2>Scan before you trust.</h2>
+          <p>Look for urgency, suspicious links, money requests, and other common scam patterns.</p>
+        </div>
+
+        <div class="panel standalone-scanner">
+          <form id="scannerForm">
+            <label for="scannerMessage">Paste a message to analyze</label>
+            <textarea id="scannerMessage" maxlength="5000" placeholder="Paste an SMS, email, job offer, or other message here..."></textarea>
+
+            <div class="input-footer">
+              <span id="scannerCharCount">0 / 5000</span>
+              <span>Do not enter real passwords or OTPs.</span>
+            </div>
+
+            <p class="form-error" id="scannerError" role="alert"></p>
+            <button class="primary-button" type="submit">Analyze message →</button>
+          </form>
+
+          <div class="scanner-tip">
+            <span>🛡</span>
+            <p><strong>Remember:</strong> scammers can write convincing messages without obvious warning signs. Always verify important requests independently.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- URL SCANNER -->
+      <section class="page-section" id="urlscanner">
+        <div class="page-intro">
+          <p class="eyebrow">LINK SAFETY</p>
+          <h2>Check a URL before opening it.</h2>
+          <p>Review basic URL signals such as HTTPS, IP-address hosts, shortened links, suspicious wording, and unusual domain patterns.</p>
+        </div>
+
+        <div class="panel standalone-scanner">
+          <form id="urlForm">
+            <label for="urlInput">Website address</label>
+            <input id="urlInput" type="text" inputmode="url" autocomplete="url" placeholder="https://example.com/login" maxlength="2000" required>
+            <p class="form-error" id="urlError" role="alert"></p>
+            <button class="primary-button" type="submit">Analyze URL →</button>
+          </form>
+
+          <div id="urlResults" class="url-results" hidden>
+            <div class="url-result-head">
+              <span id="urlRiskPill" class="risk-pill">URL report</span>
+              <strong id="urlScore">0/100</strong>
+            </div>
+
+            <h3 id="urlTitle"></h3>
+            <p id="urlSummary" class="muted"></p>
+            <ul id="urlFindings" class="findings-list"></ul>
+
+            <div class="recommendation-box">
+              <span>💡</span>
+              <div>
+                <h3>Safety tip</h3>
+                <p id="urlRecommendation"></p>
+              </div>
+            </div>
+
+            <div class="result-actions">
+              <button class="secondary-button" id="copyUrlReport" type="button">▣ Copy URL report</button>
+            </div>
+          </div>
+
+          <div class="scanner-tip">
+            <span>🔎</span>
+            <p><strong>Privacy note:</strong> this check runs in your browser and does not visit the URL. It cannot check a website's live reputation, redirects, or current malware status.</p>
+          </div>
+        </div>
+      </section>
+      <section class="page-section" id="history">
+        <div class="page-intro page-intro-row">
+          <div>
+            <p class="eyebrow">YOUR RECORDS</p>
+            <h2>Scan history</h2>
+            <p>Search, filter, export, or remove previous scans stored on this device.</p>
+          </div>
+
+          <div class="history-toolbar">
+            <button class="secondary-button" id="exportHistoryButton" type="button">↓ Export CSV</button>
+            <button class="secondary-button" id="clearHistoryButton" type="button">Clear history</button>
+          </div>
+        </div>
+
+        <div class="panel history-full-panel">
+          <div class="history-controls">
+            <input id="historySearch" type="search" placeholder="Search scanned text or result..." aria-label="Search scan history">
+            <select id="historyFilter" aria-label="Filter history by risk">
+              <option value="all">All risk levels</option>
+              <option value="high">High risk</option>
+              <option value="medium">Medium risk</option>
+              <option value="low">Lower risk</option>
+            </select>
+          </div>
+
+          <p id="historyCount" class="muted history-count">0 scans</p>
+          <div id="fullHistoryList" class="full-history-list"></div>
+        </div>
+      </section>
+      <section class="page-section" id="safety">
+        <div class="page-intro">
+          <p class="eyebrow">LEARN & PROTECT</p>
+          <h2>Your online safety guide</h2>
+          <p>Simple habits can help you avoid common online scams.</p>
+        </div>
+
+        <div class="safety-grid">
+          <article class="safety-card">
+            <div class="safety-icon icon-red">🔗</div>
+            <h3>Check links carefully</h3>
+            <p>Look closely at the website address. Avoid unexpected links and misspelled domains.</p>
+            <span class="safety-tag">LINK SAFETY</span>
+          </article>
+
+          <article class="safety-card">
+            <div class="safety-icon icon-purple">🔑</div>
+            <h3>Never share OTPs</h3>
+            <p>Never share an OTP, PIN, or password with someone who contacts you unexpectedly.</p>
+            <span class="safety-tag">ACCOUNT SAFETY</span>
+          </article>
+
+          <article class="safety-card">
+            <div class="safety-icon icon-orange">⏱</div>
+            <h3>Pause under pressure</h3>
+            <p>Scammers may create urgency. Verify the request through a trusted contact.</p>
+            <span class="safety-tag">SOCIAL ENGINEERING</span>
+          </article>
+
+          <article class="safety-card">
+            <div class="safety-icon icon-green">💳</div>
+            <h3>Verify payments</h3>
+            <p>Be cautious of unexpected fees, guaranteed returns, prize claims, and money transfers.</p>
+            <span class="safety-tag">PAYMENT SAFETY</span>
+          </article>
+
+          <article class="safety-card">
+            <div class="safety-icon icon-blue">💼</div>
+            <h3>Check job offers</h3>
+            <p>Research the employer on its official website. Be wary of paying fees to secure a job.</p>
+            <span class="safety-tag">JOB SCAMS</span>
+          </article>
+
+          <article class="safety-card">
+            <div class="safety-icon icon-yellow">📞</div>
+            <h3>Verify callers</h3>
+            <p>Contact the claimed organization using an independently verified number.</p>
+            <span class="safety-tag">CALL SAFETY</span>
+          </article>
+        </div>
+
+        <div class="emergency-banner">
+          <span class="emergency-icon">!</span>
+          <div>
+            <h3>Suspect a cybercrime in India?</h3>
+            <p>If money has been lost, contact the national cybercrime helpline at <strong>1930</strong> promptly and report through the official portal.</p>
+            <a href="https://www.cybercrime.gov.in/" target="_blank" rel="noopener noreferrer">Open official cybercrime portal ↗</a>
+          </div>
+        </div>
+      </section>
+      <section class="page-section" id="settings">
+        <div class="page-intro">
+          <p class="eyebrow">MAKE IT YOURS</p>
+          <h2>Settings & preferences</h2>
+          <p>Customize the appearance and readability of ScamShield.</p>
+        </div>
+
+        <div class="panel settings-panel">
+          <div class="settings-section-title">
+            <span class="settings-icon">◐</span>
+            <div>
+              <h3>Appearance</h3>
+              <p>Your choices are saved in this browser.</p>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <label for="themeSelect">Color theme</label>
+              <p>Switch between light and dark appearance.</p>
+            </div>
+            <select id="themeSelect">
+              <option value="light">Light mode</option>
+              <option value="dark">Dark mode</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <label for="fontSizeSelect">Text size</label>
+              <p>Change text size across the website.</p>
+            </div>
+            <select id="fontSizeSelect">
+              <option value="14px">Small</option>
+              <option value="16px" selected>Medium</option>
+              <option value="18px">Large</option>
+              <option value="20px">Extra large</option>
+            </select>
+          </div>
+
+          <div class="settings-footer">
+            <button class="secondary-button" id="resetSettings" type="button">Reset preferences</button>
+            <span id="settingsStatus" aria-live="polite">Preferences are saved on this device.</span>
+          </div>
+        </div>
+
+        <div class="panel shortcut-panel">
+          <h3>Keyboard shortcuts</h3>
+          <div class="shortcut-row"><span>Focus message scanner</span><kbd>/</kbd></div>
+          <div class="shortcut-row"><span>Open dashboard</span><kbd>G</kbd> <kbd>D</kbd></div>
+          <div class="shortcut-row"><span>Open history</span><kbd>G</kbd> <kbd>H</kbd></div>
+          <p class="muted">Shortcuts are disabled while typing in a text field.</p>
+        </div>
+      </section>
+
+      <footer class="main-footer">
+        <span>© <span id="year"></span> ScamShield</span>
+        <span>Stay alert. Stay informed. Stay safe. <span class="footer-heart">♥</span></span>
+      </footer>
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<script src="script.js"></script>
+</body>
+</html>
